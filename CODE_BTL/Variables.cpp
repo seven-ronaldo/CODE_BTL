@@ -1,6 +1,6 @@
-#include "Variables.h"
+﻿#include "Variables.h"
 #include<iostream>
-// loop variable
+// loop variable: biến vòng lặp
 extern bool isRunning = false;
 extern bool showmenu = false;
 extern bool isChoosing = true;
@@ -11,7 +11,7 @@ extern bool customMode = false;
 extern bool isWinning = false;
 extern bool lose = false;
 
-// mines
+// mines: mìn
 extern int mineCountLeft = NumberOfMines;
 extern int CountTileLeft = BOARD_SIZE_X * BOARD_SIZE_Y;
 
@@ -48,11 +48,11 @@ extern LTexture wInput(NULL, 0, 0);
 extern LTexture hInput(NULL, 0, 0);
 extern LTexture mInput(NULL, 0, 0);
 
-// create board data
+// create board data: tạo dữ liệu bảng
 extern std::vector <std::vector<int> > sBoard(3, std::vector<int>(2, 0));
 extern std::vector <std::vector<int> > board(3, std::vector<int>(2, 0));
 
-// Tiles in board
+// Tiles in board: Gạch trong bảng
 extern LTexture Tiles_image(NULL, 0, 0);
 extern SDL_Rect Tilesprites[12] = {};
 
@@ -69,11 +69,11 @@ extern int digit_x = 0;
 extern int digit_y = 0;
 extern int timeDigit_x = 0;
 
-// digits image
+// digits image: hình ảnh chữ số
 extern LTexture Digits(NULL, 0, 0);
 extern SDL_Rect Digitsprites[10] = {};
 
-// Board size
+// Board size: Kích thước bảng
 extern int BOARD_SIZE_X = 0;
 extern int BOARD_SIZE_Y = 0;
 extern int NumberOfMines = 0;

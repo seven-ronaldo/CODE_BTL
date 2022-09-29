@@ -14,7 +14,7 @@ LButton sound;
 LTimer timer;
 
 //initialization func
-bool init()
+bool LFunction::init()
 {
 	//Initialization flag
 	bool success = true;
@@ -81,7 +81,7 @@ bool init()
 	return success;
 }
 
-bool loadmedia()
+bool LFunction::loadmedia()
 {
 	bool success = true;
 	//Open image of tiles
@@ -217,7 +217,7 @@ bool loadmedia()
 	return success;
 }
 
-bool loadMenuMedia()
+bool LFunction::loadMenuMedia()
 {
 	bool success = true;
 	//load background of menu
@@ -284,7 +284,7 @@ bool loadMenuMedia()
 }
 
 //initialization games
-void CreateBoard()
+void LFunction::CreateBoard()
 {
 	srand(time(0));
 	int mine = 0;
@@ -328,7 +328,7 @@ void CreateBoard()
 	}
 }
 
-void setButtonPosition()
+void LFunction::setButtonPosition()
 {
 	face.setPosition(BOARD_SIZE_X * TILE_SIZE / 2, digit_y);
 	goBack.setPosition(0, 0);
@@ -342,7 +342,7 @@ void setButtonPosition()
 	}
 }
 
-void createMenu()
+void LFunction::createMenu()
 {
 	menuTheme.render(0, 0);
 	menu.render(300, 400);
@@ -350,7 +350,7 @@ void createMenu()
 	SDL_RenderPresent(renderer);
 }
 
-void createModeMenu()
+void LFunction::createModeMenu()
 {
 	levelTheme.render(0, 0);
 	easyChoice.render(300, 150);
@@ -359,7 +359,7 @@ void createModeMenu()
 	customChoice.render(300, 300);
 }
 
-void showMenu()
+void LFunction::showMenu()
 {
 	bool startInside = false;
 	bool exitInside = false;
@@ -421,7 +421,7 @@ void showMenu()
 	}
 }
 
-void showModeChoice()
+void LFunction::showModeChoice()
 {
 	bool easyInside = false;
 	bool mediumInside = false;
@@ -524,7 +524,7 @@ void showModeChoice()
 	}
 }
 
-void CustomMode()
+void LFunction::CustomMode()
 {
 	SDL_Event e{};
 	SDL_Color black = { 0,0,0,0 };
@@ -684,7 +684,7 @@ void CustomMode()
 }
 
 //ingame func
-void handleEvent()
+void LFunction::handleEvent()
 {
 	SDL_Event e;
 	while (SDL_PollEvent(&e) != 0)
@@ -708,7 +708,7 @@ void handleEvent()
 	}
 }
 
-void reveal(int i, int j)
+void LFunction::reveal(int i, int j)
 {
 	if (sBoard[i][j] == 10 || sBoard[i][j] == 11)
 	{
@@ -734,12 +734,12 @@ void reveal(int i, int j)
 	}
 }
 
-void isPlayerWinning()
+void LFunction::isPlayerWinning()
 {
 	if (CountTileLeft == NumberOfMines) isWinning = true;
 }
 
-void GameManager()
+void LFunction::GameManager()
 {
 	if (playAgain == true) PlayAgain();
 	//if we lose 
@@ -764,7 +764,7 @@ void GameManager()
 	}
 }
 
-std::string getTime()
+std::string LFunction::getTime()
 {
 	stringstream Time{};
 	if (isWinning == true)
@@ -780,7 +780,7 @@ std::string getTime()
 	}
 }
 
-std::string getFileScoreName()
+std::string LFunction::getFileScoreName()
 {
 	stringstream os;
 	os.str("");
@@ -788,7 +788,7 @@ std::string getFileScoreName()
 	return os.str();
 }
 
-void getScore()
+void LFunction::getScore()
 {
 	ofstream outFile;
 	outFile.open(getFileScoreName().c_str(), ios::app);
@@ -796,7 +796,7 @@ void getScore()
 	outFile.close();
 }
 
-void PlayAgain()
+void LFunction::PlayAgain()
 {
 	//timer.stop();
 	if (isWinning) getScore();
@@ -810,7 +810,7 @@ void PlayAgain()
 	playAgain = false;
 }
 
-void MineManager()
+void LFunction::MineManager()
 {
 	int n = mineCountLeft;
 	if (mineCountLeft < 10)
@@ -835,7 +835,7 @@ void MineManager()
 	}
 }
 
-void TimeManager()
+void LFunction::TimeManager()
 {
 	int n = timer.getTicks() / 1000;
 	if (n < 10)
@@ -859,7 +859,7 @@ void TimeManager()
 
 }
 
-void setGameMode(int x, int y, int n, int dx, int dy, int d1x, int d1y, int dtx, int& BOARD_SIZE_X, int& BOARD_SIZE_Y, int& NumberOfMines, int& mineCountLeft, int& CountTileLeft, int& distance_x, int& distance_y, int& digit_x, int& digit_y, int& timeDigit_x)
+void LFunction::setGameMode(int x, int y, int n, int dx, int dy, int d1x, int d1y, int dtx, int& BOARD_SIZE_X, int& BOARD_SIZE_Y, int& NumberOfMines, int& mineCountLeft, int& CountTileLeft, int& distance_x, int& distance_y, int& digit_x, int& digit_y, int& timeDigit_x)
 {
 	BOARD_SIZE_X = x;
 	BOARD_SIZE_Y = y;
@@ -889,7 +889,7 @@ void setGameMode(int x, int y, int n, int dx, int dy, int d1x, int d1y, int dtx,
 	}
 }
 
-void renderButton()
+void LFunction::renderButton()
 {
 	for (int i = 0; i < BOARD_SIZE_X; i++)
 	{
@@ -900,7 +900,7 @@ void renderButton()
 	}
 }
 
-void renderGame()
+void LFunction::renderGame()
 {
 	if (mute == false)
 	{
@@ -951,7 +951,7 @@ void renderGame()
 }
 
 //close SDL
-void close()
+void LFunction::close()
 {
 	//Free loaded images
 	Tiles_image.free();

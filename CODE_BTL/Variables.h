@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 #pragma once
 #ifndef VARIABLES_H
 #define VARIABLES_H
@@ -7,24 +7,24 @@
 #include "constant.h"
 #include "Buttons.h"
 
-// initialization
+// initialization: khởi tạo
 extern SDL_Window* window;
 extern SDL_Renderer* renderer;
 
-// loop variable
+// loop variable: biến vòng lặp
 extern bool isRunning;
 extern bool showmenu;
 extern bool isChoosing;
 extern bool mainLoop;
 extern bool customMode;
 
-//win or lose
+//win or lose : thắng thua
 extern bool isWinning;
 extern bool lose;
 
 
 
-// image use in game
+// image use in game : ảnh trong game
 extern LTexture menuTheme;
 extern LTexture levelTheme;
 extern LTexture easyTable;
@@ -35,12 +35,12 @@ extern LTexture back;
 extern LTexture sound_on;
 extern LTexture sound_off;
 
-// image face
+// image face: khuôn mặt hình ảnh
 extern LTexture winFace;
 extern LTexture playingFace;
 extern LTexture loseFace;
 
-// Tiles in board
+// Tiles in board: Gạch trong bảng
 extern LTexture Tiles_image;
 extern SDL_Rect Tilesprites[12];
 
@@ -62,32 +62,32 @@ extern LTexture hInput;
 extern LTexture mInput;
 extern TTF_Font* gFont;
 
-// Create board data 
+// Create board data: Tạo dữ liệu bảng
 extern std::vector <std::vector<int> > sBoard;
 extern std::vector <std::vector<int> > board;
 
-// mines
+// mines : mìn
 extern int mineCountLeft;
 extern int CountTileLeft;
 
-// audio
+// audio: âm thanh
 extern bool mute;
 extern Mix_Chunk* click;
 extern Mix_Music* loseMusic;
 extern Mix_Music* winMusic;
 
-// distance
+// distance: khoảng cách
 extern int distance_x;
 extern int distance_y;
 extern int digit_x;
 extern int digit_y;
 extern int timeDigit_x;
 
-// digits image
+// digits image: hình ảnh chữ số
 extern LTexture Digits;
 extern SDL_Rect Digitsprites[10];
 
-// board size
+// board size: Kích thước bảng
 extern int BOARD_SIZE_X;
 extern int BOARD_SIZE_Y;
 extern int NumberOfMines;

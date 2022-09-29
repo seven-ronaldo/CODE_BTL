@@ -1,4 +1,4 @@
-#include "Texture.h"
+﻿#include "Texture.h"
 #include "Buttons.h"
 #include "Variables.h"
 #include "constant.h"
@@ -8,37 +8,38 @@ using namespace std;
 
 int main(int argc, char* argv[])
 {
-	//Start up SDL and create window
-	if (!init())
+	LFunction game;
+	//Start up SDL and create window: Khởi động SDL và tạo cửa sổ
+	if (!game.init())
 	{
 		printf("Failed to initialize!\n");
 	}
 	else
 	{
-		if (loadmedia())
+		if (game.loadmedia())
 		{
-			if (loadMenuMedia())
+			if (game.loadMenuMedia())
 			{
-				showMenu();
+				game.showMenu();
 				while (mainLoop)
 				{
 					if (isChoosing)
 					{
-						showModeChoice();
+						game.showModeChoice();
 					}
-					if (customMode) CustomMode();
+					if (customMode) game.CustomMode();
 					while (isRunning)
 					{
-						handleEvent();
-						setButtonPosition();
-						renderGame();
+						game.handleEvent();
+						game.setButtonPosition();
+						game.renderGame();
 					}
 				}
 			}
 		}
 	}
-	//Free resources and close SDL
-	close();
+	//Free resources and close SDL: giải phóng tài nguyên và đóng SDL
+	game.close();
 	return 0;
 }
 
