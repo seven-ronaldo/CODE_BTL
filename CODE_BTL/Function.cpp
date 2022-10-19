@@ -1,4 +1,4 @@
-#include "Texture.h"
+﻿#include "Texture.h"
 #include "Variables.h"
 #include "constant.h"
 #include "Buttons.h"
@@ -949,7 +949,38 @@ void LFunction::renderGame()
 	GameManager();
 	SDL_RenderPresent(renderer);
 }
-
+//Play Minesweeper
+void LFunction::PlayGame() {
+	// Start up SDL and create window : Khởi động SDL và tạo cửa sổ
+	if (!init())
+	{
+		printf("Failed to initialize!\n");
+	}
+	else
+	{
+		if (loadmedia())
+		{
+			if (loadMenuMedia())
+			{
+				showMenu();
+				while (mainLoop)
+				{
+					if (isChoosing)
+					{
+						showModeChoice();
+					}
+					if (customMode) CustomMode();
+					while (isRunning)
+					{
+						handleEvent();
+						setButtonPosition();
+						renderGame();
+					}
+				}
+			}
+		}
+	}
+}
 //close SDL
 void LFunction::close()
 {
