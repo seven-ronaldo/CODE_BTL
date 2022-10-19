@@ -34,6 +34,7 @@ public:
 	void handleEvent();
 	void reveal(int i, int j);
 	void renderGame();
+	void PlayGame();
 private:
 	std::string getTime();
 	std::string getFileScoreName();
