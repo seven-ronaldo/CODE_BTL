@@ -1,7 +1,4 @@
-﻿#include "Variables.h"
-#include "constant.h"
-#include "Buttons.h"
-#include "function.h"
+﻿#include "Buttons.h"
 
 LButton::LButton()
 {

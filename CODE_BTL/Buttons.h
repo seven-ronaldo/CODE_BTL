@@ -3,9 +3,11 @@
 
 #ifndef BUTTONS_H
 #define BUTTONS_H
-#include "Function.h"
-#include <SDL.h>
 
+#include "Function.h"
+#include "Variables.h"
+#include "constant.h"
+#include <SDL.h>
 
 class LButton : public LFunction
 {

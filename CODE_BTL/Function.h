@@ -1,7 +1,14 @@
 ﻿#pragma once
 #pragma once
 #include "Timer.h"
+#include "Texture.h"
+#include "constant.h"
+#include "Timer.h"
+
+#include <string>
 #include <SDL.h>
+#include <sstream>
+#include <fstream>
 
 class LFunction {
 public:
@@ -34,6 +41,7 @@ public:
 	void handleEvent();
 	void reveal(int i, int j);
 	void renderGame();
+	void PlayGame();
 private:
 	std::string getTime();
 	std::string getFileScoreName();

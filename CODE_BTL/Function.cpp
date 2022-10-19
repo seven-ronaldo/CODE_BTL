@@ -1,12 +1,8 @@
-#include "Texture.h"
-#include "Variables.h"
-#include "constant.h"
+﻿#include "Function.h"
 #include "Buttons.h"
-#include "function.h"
-#include "Timer.h"
-#include <sstream>
-#include <fstream>
+#include "Variables.h"
 using namespace std;
+
 vector <vector<LButton> > Buttons(3, vector<LButton>(2));
 LButton face;
 LButton goBack;
@@ -22,7 +18,7 @@ bool LFunction::init()
 	//Initialize SDL
 	if (SDL_Init(SDL_INIT_VIDEO) < 0)
 	{
-		printf("SDL could not initialize! SDL Error: %s\n", SDL_GetError());
+		cout << "SDL could not initialize! SDL Error: " << SDL_GetError() << endl;
 		success = false;
 	}
 	else
@@ -30,14 +26,14 @@ bool LFunction::init()
 		//Set texture filtering to linear
 		if (!SDL_SetHint(SDL_HINT_RENDER_SCALE_QUALITY, "1"))
 		{
-			printf("Warning: Linear texture filtering not enabled!");
+			cout << "Warning: Linear texture filtering not enabled!";
 		}
 
 		//Create window
 		window = SDL_CreateWindow(WINDOW_TITLE.c_str(), SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, SCREEN_WIDTH, SCREEN_HEIGHT, SDL_WINDOW_SHOWN);
 		if (window == NULL)
 		{
-			printf("Window could not be created! SDL Error: %s\n", SDL_GetError());
+			cout << "Window could not be created! SDL Error: " << SDL_GetError() << endl;
 			success = false;
 		}
 		else
@@ -46,7 +42,7 @@ bool LFunction::init()
 			renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
 			if (renderer == NULL)
 			{
-				printf("Renderer could not be created! SDL Error: %s\n", SDL_GetError());
+				cout << "Renderer could not be created! SDL Error: " << SDL_GetError() << endl;
 				success = false;
 			}
 			else
@@ -58,20 +54,20 @@ bool LFunction::init()
 				int imgFlags = IMG_INIT_PNG;
 				if (!(IMG_Init(imgFlags) & imgFlags))
 				{
-					printf("SDL_image could not initialize! SDL_image Error: %s\n", IMG_GetError());
+					cout << "SDL_image could not initialize! SDL_image Error: " << IMG_GetError() << endl;
 					success = false;
 				}
 
 				//Initialize SDL_ttf
 				if (TTF_Init() == -1)
 				{
-					printf("SDL_ttf could not initialize! SDL_ttf Error: %s\n", TTF_GetError());
+					cout << "SDL_ttf could not initialize! SDL_ttf Error: " << TTF_GetError() << endl;
 					success = false;
 				}
 				//Initialize SDL_mixer
 				if (Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 2048) < 0)
 				{
-					printf("SDL_mixer could not initialize! SDL_mixer Error: %s\n", Mix_GetError());
+					cout << "SDL_mixer could not initialize! SDL_mixer Error: " << Mix_GetError() << endl;
 					success = false;
 				}
 			}
@@ -87,7 +83,7 @@ bool LFunction::loadmedia()
 	//Open image of tiles
 	if (!Tiles_image.loadFromFile("res/images/tiles5.jpg"))
 	{
-		printf("Can't load this image from file!");
+		cout << "Can't load this image from file!";
 		success = false;
 	}
 	else
@@ -104,7 +100,7 @@ bool LFunction::loadmedia()
 	//load digits
 	if (!Digits.loadFromFile("res/images/Untitled1.png"))
 	{
-		printf("Fail");
+		cout << "Fail";
 		success = false;
 	}
 	else
@@ -121,35 +117,35 @@ bool LFunction::loadmedia()
 	//load easy table
 	if (!easyTable.loadFromFile("res/images/easy.png"))
 	{
-		printf("Fail");
+		cout << "Fail";
 		success = false;
 	}
 	//load medium table
 	if (!mediumTable.loadFromFile("res/images/medium.png"))
 	{
-		printf("Fail");
+		cout << "Fail";
 		success = false;
 	}
 	//load hard table
 	if (!hardTable.loadFromFile("res/images/hard.png"))
 	{
-		printf("Fail");
+		cout << "Fail";
 		success = false;
 	}
 	//load face
 	if (!winFace.loadFromFile("res/images/winface.png"))
 	{
-		printf("Fail");
+		cout << "Fail";
 		success = false;
 	}
 	if (!loseFace.loadFromFile("res/images/loseface.png"))
 	{
-		printf("Fail");
+		cout << "Fail";
 		success = false;
 	}
 	if (!playingFace.loadFromFile("res/images/playingface.png"))
 	{
-		printf("Fail");
+		cout << "Fail";
 		success = false;
 	}
 	if (!back.loadFromFile("res/images/backicon.png"))
@@ -168,35 +164,35 @@ bool LFunction::loadmedia()
 	gFont = TTF_OpenFont("res/font.ttf", 20);
 	if (gFont == NULL)
 	{
-		printf("Failed to load lazy font! SDL_ttf Error: %s\n", TTF_GetError());
+		cout << "Failed to load lazy font! SDL_ttf Error: " << TTF_GetError() << endl;
 		success = false;
 	}
 	//load text
 	SDL_Color textcolor1 = { 255,255,255 };
 	if (!menu.loadFromRenderedText("START", textcolor1))
 	{
-		printf("Fail");
+		cout << "Fail";
 	}
 	if (!menu1.loadFromRenderedText("EXIT", textcolor1))
 	{
-		printf("fail!");
+		cout << "Fail";
 	}
 	SDL_Color color = { 255,0,0 };
 	if (!menuColor.loadFromRenderedText("START", color))
 	{
-		printf("Fail");
+		cout << "Fail";
 		success = false;
 	}
 	if (!menu1Color.loadFromRenderedText("EXIT", color))
 	{
-		printf("Fail");
+		cout << "Fail";
 		success = false;
 	}
 	//Load music
 	loseMusic = Mix_LoadMUS("res/audio/scratch.wav");
 	if (loseMusic == NULL)
 	{
-		printf("Failed to load beat music! SDL_mixer Error: %s\n", Mix_GetError());
+		cout << "Failed to load beat music! SDL_mixer Error: " << Mix_GetError() << endl;
 		success = false;
 	}
 
@@ -204,14 +200,14 @@ bool LFunction::loadmedia()
 	winMusic = Mix_LoadMUS("res/audio/beat.wav");
 	if (winMusic == NULL)
 	{
-		printf("Failed to load scratch sound effect! SDL_mixer Error: %s\n", Mix_GetError());
+		cout << "Failed to load beat music! SDL_mixer Error: " << Mix_GetError() << endl;
 		success = false;
 	}
 
 	click = Mix_LoadWAV("res/audio/click.wav");
 	if (click == NULL)
 	{
-		printf("Failed to load high sound effect! SDL_mixer Error: %s\n", Mix_GetError());
+		cout << "Failed to load beat music! SDL_mixer Error: " << Mix_GetError() << endl;
 		success = false;
 	}
 	return success;
@@ -223,61 +219,61 @@ bool LFunction::loadMenuMedia()
 	//load background of menu
 	if (!menuTheme.loadFromFile("res/images/menu.jpg"))
 	{
-		printf("Fail!");
+		cout << "Fail";
 		success = false;
 	}
 	//load level choice
 	if (!levelTheme.loadFromFile("res/images/mode.jpg"))
 	{
-		printf("Fail");
+		cout << "Fail";
 		success = false;
 	}
 	if (!customStart.loadFromFile("res/images/custom.png"))
 	{
-		printf("Fail");
+		cout << "Fail";
 		success = true;
 	}
 	//load choice text
 	SDL_Color textColor = { 255,255,255 };
 	if (!easyChoice.loadFromRenderedText("EASY MODE", textColor))
 	{
-		printf("Fail");
+		cout << "Fail";
 		success = false;
 	}
 	if (!mediumChoice.loadFromRenderedText("MEDIUM MODE", textColor))
 	{
-		printf("Fail");
+		cout << "Fail";
 		success = false;
 	}
 	if (!hardChoice.loadFromRenderedText("HARD MODE", textColor))
 	{
-		printf("Fail");
+		cout << "Fail";
 		success = false;
 	}
 	if (!customChoice.loadFromRenderedText("CUSTOM MODE", textColor))
 	{
-		printf("Fail");
+		cout << "Fail";
 		success = false;
 	}
 	SDL_Color textcolor = { 255,0,0 };
 	if (!easyChoiceColor.loadFromRenderedText("EASY MODE", textcolor))
 	{
-		printf("Fail");
+		cout << "Fail";
 		success = false;
 	}
 	if (!mediumChoiceColor.loadFromRenderedText("MEDIUM MODE", textcolor))
 	{
-		printf("Fail");
+		cout << "Fail";
 		success = false;
 	}
 	if (!hardChoiceColor.loadFromRenderedText("HARD MODE", textcolor))
 	{
-		printf("Fail");
+		cout << "Fail";
 		success = false;
 	}
 	if (!customChoiceColor.loadFromRenderedText("CUSTOM MODE", textcolor))
 	{
-		printf("Fail");
+		cout << "Fail";
 		success = false;
 	}
 	return success;
@@ -949,7 +945,38 @@ void LFunction::renderGame()
 	GameManager();
 	SDL_RenderPresent(renderer);
 }
-
+//Play Minesweeper
+void LFunction::PlayGame() {
+	// Start up SDL and create window : Khởi động SDL và tạo cửa sổ
+	if (!init())
+	{
+		cout << "Failed to initialize!" << endl;
+	}
+	else
+	{
+		if (loadmedia())
+		{
+			if (loadMenuMedia())
+			{
+				showMenu();
+				while (mainLoop)
+				{
+					if (isChoosing)
+					{
+						showModeChoice();
+					}
+					if (customMode) CustomMode();
+					while (isRunning)
+					{
+						handleEvent();
+						setButtonPosition();
+						renderGame();
+					}
+				}
+			}
+		}
+	}
+}
 //close SDL
 void LFunction::close()
 {
